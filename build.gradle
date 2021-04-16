@@ -48,43 +48,32 @@ publishing {
             version project.version
 
             from components.java
-        }
-        pom {
-            name = 'inject'//项目名
-            description = '\n' +
-                    'About\n' +
-                    '\n' +
-                    'Bytecode framework for Java, Inject method into another\n' +
-                    'Topics\n' +
-                    'Resources\n' +
-                    'Readme\n' +
-                    'License\n' +
-                    'Apache-2.0 License\n'//描述
-            url = 'https://github.com/Enaium/accessor/'//地址
 
-            //协议
-            licenses {
-                license {
-                    name = 'The Apache License, Version 2.0'
-                    url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            pom {
+                name = 'inject'
+                description = 'Bytecode framework for Java, Inject method into another'
+                url = 'https://github.com/Enaium/inject/'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
                 }
-            }
 
-            //开发者信息
-            developers {
-                developer {
-                    id = 'enaium'
-                    name = 'Enaium'
-                    email = 'Enaium@outlook.com'
+                developers {
+                    developer {
+                        id = 'enaium'
+                        name = 'Enaium'
+                        email = 'Enaium@outlook.com'
+                    }
                 }
-            }
 
-
-            //git地址
-            scm {
-                connection = 'scm:git:https://github.com/Enaium/accessor.git'
-                developerConnection = 'scm:git:https://github.com/Enaium/accessor.git'
-                url = 'https://github.com/Enaium/accessor/'
+                scm {
+                    connection = 'scm:git:https://github.com/Enaium/inject.git'
+                    developerConnection = 'scm:git:https://github.com/Enaium/inject.git'
+                    url = 'https://github.com/Enaium/inject/'
+                }
             }
         }
     }
