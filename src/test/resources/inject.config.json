@@ -1,0 +1,5 @@
+{
+  "injects": [
+    "cn.enaium.inject.TestInject"
+  ]
+}
