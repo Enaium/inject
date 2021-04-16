@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'java-library'
     id 'maven-publish'
+    id 'signing'
 }
 
 group 'cn.enaium'
@@ -30,6 +31,14 @@ publishing {
                 url ENV.MAVEN_URL
             }
         }
+
+        maven {
+            url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
+            }
+        }
     }
 
     publications {
@@ -40,5 +49,47 @@ publishing {
 
             from components.java
         }
+        pom {
+            name = 'inject'//项目名
+            description = '\n' +
+                    'About\n' +
+                    '\n' +
+                    'Bytecode framework for Java, Inject method into another\n' +
+                    'Topics\n' +
+                    'Resources\n' +
+                    'Readme\n' +
+                    'License\n' +
+                    'Apache-2.0 License\n'//描述
+            url = 'https://github.com/Enaium/accessor/'//地址
+
+            //协议
+            licenses {
+                license {
+                    name = 'The Apache License, Version 2.0'
+                    url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
+
+            //开发者信息
+            developers {
+                developer {
+                    id = 'enaium'
+                    name = 'Enaium'
+                    email = 'Enaium@outlook.com'
+                }
+            }
+
+
+            //git地址
+            scm {
+                connection = 'scm:git:https://github.com/Enaium/accessor.git'
+                developerConnection = 'scm:git:https://github.com/Enaium/accessor.git'
+                url = 'https://github.com/Enaium/accessor/'
+            }
+        }
     }
+}
+
+signing {
+    sign publishing.publications.mavenJava
 }
