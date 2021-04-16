@@ -50,7 +50,7 @@ public class Test {
 ```
 
 ```java
-public static void main(String[] args) throws IOException {
+public static void main(String[] args) {
     //Add configuration
     Inject.addConfiguration("inject.config.json");
 
