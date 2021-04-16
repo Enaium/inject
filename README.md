@@ -49,7 +49,7 @@ public class Test {
 }
 ```
 
-```
+```java
 public static void main(String[] args) throws IOException {
     //Add configuration
     Inject.addConfiguration("inject.config.json");
