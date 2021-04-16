@@ -18,6 +18,16 @@ dependencies {
     implementation('com.google.code.gson:gson:2.2.4')
 }
 
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
 java {
     withJavadocJar()
     withSourcesJar()
