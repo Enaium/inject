@@ -74,37 +74,26 @@ public class Inject {
 
             String className = null;
             for (AnnotationNode invisibleAnnotation : injectNode.invisibleAnnotations) {
-                className = getAnnotationValue(invisibleAnnotation, "value");
+                Type value = getAnnotationValue(invisibleAnnotation, "value");
+                if (value != null && !value.getDescriptor().equals(ASMUtil.getDescriptor(cn.enaium.inject.annotation.Inject.class))) {
+                    className = value.getClassName();
+                    continue;
+                }
+
+                String target = getAnnotationValue(invisibleAnnotation, "target");
+                if (target != null && !target.equals("")) {
+                    className = target;
+                }
             }
 
             if (className != null) {
 
-
                 className = remapping.getOrDefault(className, className).replace(".", "/");
 
-                if (!className.equals(targetNode.name)) {
-                    continue;
-                }
+                if (!className.equals(targetNode.name)) continue;
 
-                for (FieldNode field : injectNode.fields) {
-                    if (field.invisibleAnnotations != null) {
-                        for (AnnotationNode annotationNode : field.invisibleAnnotations) {
-                            if (annotationNode.desc.equals(ASMUtil.getDescriptor(Shadow.class))) {
-                                shadows.add(field.name + field.desc);
-                            }
-                        }
-                    }
-                }
-
-                for (MethodNode method : injectNode.methods) {
-                    if (method.invisibleAnnotations != null) {
-                        for (AnnotationNode annotationNode : method.invisibleAnnotations) {
-                            if (annotationNode.desc.equals(ASMUtil.getDescriptor(Shadow.class))) {
-                                shadows.add(method.name + method.desc);
-                            }
-                        }
-                    }
-                }
+                injectNode.fields.stream().filter(field -> field.invisibleAnnotations != null).forEach(field -> field.invisibleAnnotations.stream().filter(annotationNode -> annotationNode.desc.equals(ASMUtil.getDescriptor(Shadow.class))).map(annotationNode -> field.name + field.desc).forEach(shadows::add));
+                injectNode.methods.stream().filter(method -> method.invisibleAnnotations != null).forEach(method -> method.invisibleAnnotations.stream().filter(annotationNode -> annotationNode.desc.equals(ASMUtil.getDescriptor(Shadow.class))).map(annotationNode -> method.name + method.desc).forEach(shadows::add));
 
                 for (MethodNode injectMethodNode : injectNode.methods) {
                     String methodName = null;
@@ -160,7 +149,6 @@ public class Inject {
                                 if (!ASMUtil.getArgs(targetMethodNode.desc).equals(ASMUtil.cleanCallback(ASMUtil.getArgs(injectMethodNode.desc)))) {
                                     continue;
                                 }
-
 
                                 int returnCount = 0;
                                 int invokeCount = 0;

@@ -9,7 +9,7 @@ import cn.enaium.inject.callback.Callback;
 /**
  * @author Enaium
  */
-@Inject("cn.enaium.inject.Test")
+@Inject(Test.class)
 public class TestInject {
 
     @Shadow

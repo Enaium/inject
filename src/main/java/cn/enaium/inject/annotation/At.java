@@ -1,9 +1,7 @@
 package cn.enaium.inject.annotation;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 
 /**
  * @author Enaium
@@ -18,7 +16,7 @@ public @interface At {
     Type type();
 
     /**
-     * return/invoke ordinal
+     * <b>return</b> or <b>invoke</b> ordinal
      *
      * @return ordinal
      */
@@ -30,10 +28,25 @@ public @interface At {
     String target() default "";
 
     enum Type {
-        HEAD, //Method begin
-        TAIL,//Method end
-        RETURN,//Method return
-        INVOKE,//Method invoke
-        OVERWRITE//Overwrite method
+        /**
+         * Method begin
+         */
+        HEAD,
+        /**
+         * Method end
+         */
+        TAIL,
+        /**
+         * Method return
+         */
+        RETURN,
+        /**
+         * Method invoke
+         */
+        INVOKE,
+        /**
+         * Overwrite method
+         */
+        OVERWRITE
     }
 }

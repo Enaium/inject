@@ -11,7 +11,13 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.CLASS)
 public @interface Method {
+    /**
+     * @return method name
+     */
     String name();
 
+    /**
+     * @return at ...
+     */
     At at();
 }
