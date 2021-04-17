@@ -1,5 +1,6 @@
 {
   "injects": [
     "cn.enaium.inject.TestInject"
-  ]
+  ],
+  "remapping": "inject.remapping.json"
 }

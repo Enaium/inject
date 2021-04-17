@@ -25,7 +25,7 @@ public class Inject {
 
 
     private static final ArrayList<ClassNode> classNodes = new ArrayList<>();
-    private static final HashMap<String, String> mapping = new HashMap<>();
+    private static final HashMap<String, HashMap<String, String>> mapping = new HashMap<>();
 
     public static void addConfiguration(String name) {
         addConfiguration(Thread.currentThread().getContextClassLoader(), name);
@@ -45,7 +45,7 @@ public class Inject {
                 classNodes.add(classNode);
             }
             if (configuration.remapping != null) {
-                mapping.putAll(new Gson().fromJson(IOUtils.toString(Objects.requireNonNull(classLoader.getResourceAsStream(configuration.remapping))), new TypeToken<HashMap<String, String>>() {
+                mapping.putAll(new Gson().fromJson(IOUtils.toString(Objects.requireNonNull(classLoader.getResourceAsStream(configuration.remapping))), new TypeToken<HashMap<String, HashMap<String, String>>>() {
                 }.getType()));
             }
         } catch (IOException e) {
@@ -64,6 +64,12 @@ public class Inject {
         classReader.accept(targetNode, 0);
 
         for (ClassNode injectNode : classNodes) {
+            final HashMap<String, String> remapping = new HashMap<>();
+
+            if (mapping.containsKey(injectNode.name)) {
+                remapping.putAll(mapping.get(injectNode.name));
+            }
+
             final ArrayList<String> shadows = new ArrayList<>();
 
             String className = null;
@@ -72,7 +78,9 @@ public class Inject {
             }
 
             if (className != null) {
-                className = mapping.getOrDefault(className, className).replace(".", "/");
+
+
+                className = remapping.getOrDefault(className, className).replace(".", "/");
 
                 if (!className.equals(targetNode.name)) {
                     continue;
@@ -118,13 +126,13 @@ public class Inject {
                                 }
                                 String target = getAnnotationValue(atAnnotationNode, "target");
                                 if (target != null) {
-                                    methodTarget = mapping.getOrDefault(target, target);
+                                    methodTarget = remapping.getOrDefault(target, target);
                                 }
                             }
                         }
 
                         if (methodName != null && methodType != null) {
-                            methodName = mapping.getOrDefault(methodName, methodName);
+                            methodName = remapping.getOrDefault(methodName, methodName);
 
                             MethodNode injectToTargetMethodNode = new MethodNode(injectMethodNode.access, injectMethodNode.name, injectMethodNode.desc, null, null);
                             injectToTargetMethodNode.instructions.add(injectMethodNode.instructions);
