@@ -12,10 +12,6 @@ Inject method into another
 
 [![Maven URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fmaven.enaium.cn%2Fcn%2Fenaium%2Finject%2Fmaven-metadata.xml&style=flat-square)](https://maven.enaium.cn)
 
-### [JitPack](https://jitpack.io/#Enaium/inject)
-
-[![JitPack](https://img.shields.io/jitpack/v/github/Enaium/inject?style=flat-square)](https://jitpack.io/#Enaium/inject)
-
 ## Usage
 
 ```java
