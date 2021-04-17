@@ -21,18 +21,18 @@ public class TestInject {
     }
 
 
-    @Method(name = "render", type = @At(type = At.Type.HEAD))
+    @Method(name = "render", at = @At(type = At.Type.HEAD))
     private void renderInject(String var1, int var2, boolean var3) {
         System.out.println("HELLO INJECT");
     }
 
-    @Method(name = "render", type = @At(type = At.Type.HEAD))
+    @Method(name = "render", at = @At(type = At.Type.HEAD))
     public void renderInject() {
         test();
         System.out.println(name);
     }
 
-    @Method(name = "render", type = @At(type = At.Type.HEAD))
+    @Method(name = "render", at = @At(type = At.Type.HEAD))
     public void renderInject(String var1, Callback callback) {
         callback.cancel();
         callback.setReturnValue("CANCEL");

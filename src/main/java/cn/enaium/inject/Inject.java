@@ -106,17 +106,17 @@ public class Inject {
                     if (injectMethodNode.invisibleAnnotations != null) {
                         for (AnnotationNode invisibleAnnotation : injectMethodNode.invisibleAnnotations) {
                             methodName = getAnnotationValue(invisibleAnnotation, "name");
-                            AnnotationNode typeAnnotationNode = getAnnotationValue(invisibleAnnotation, "type");
-                            if (typeAnnotationNode != null) {
-                                String[] type = getAnnotationValue(typeAnnotationNode, "type");
+                            AnnotationNode atAnnotationNode = getAnnotationValue(invisibleAnnotation, "at");
+                            if (atAnnotationNode != null) {
+                                String[] type = getAnnotationValue(atAnnotationNode, "type");
                                 if (type != null) {
                                     methodType = At.Type.valueOf(type[1]);
                                 }
-                                Integer ordinal = getAnnotationValue(typeAnnotationNode, "ordinal");
+                                Integer ordinal = getAnnotationValue(atAnnotationNode, "ordinal");
                                 if (ordinal != null) {
                                     methodOrdinal = ordinal;
                                 }
-                                String target = getAnnotationValue(typeAnnotationNode, "target");
+                                String target = getAnnotationValue(atAnnotationNode, "target");
                                 if (target != null) {
                                     methodTarget = mapping.getOrDefault(target, target);
                                 }

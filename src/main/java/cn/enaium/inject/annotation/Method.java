@@ -13,5 +13,5 @@ import java.lang.annotation.Target;
 public @interface Method {
     String name();
 
-    At type();
+    At at();
 }
