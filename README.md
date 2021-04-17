@@ -17,7 +17,7 @@ Inject method into another
 ```java
 @Inject("cn.enaium.inject.Test")
 public class TestInject {
-    @Method(name = "render", type = @At(type = At.Type.HEAD))
+    @Method(name = "render", at = @At(type = At.Type.HEAD))
     private void renderInject(String var1, int var2, boolean var3) {
         System.out.println("HELLO INJECT");
     }
