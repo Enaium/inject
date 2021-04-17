@@ -6,7 +6,7 @@ Inject method into another
 
 ### [Maven](https://repo1.maven.org/maven2/cn/enaium/inject/)
 
-[![Maven Central](https://img.shields.io/maven-central/v/cn.enaium/inject?style=flat-square)](https://repo1.maven.org/maven2/cn/enaium/inject/)
+[![Maven Central](https://img.shields.io/maven-central/v/cn.enaium/inject?style=flat-square)](https://search.maven.org/artifact/cn.enaium/inject/)
 
 ### [Enaium Maven](https://maven.enaium.cn)
 
